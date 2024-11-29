@@ -77,12 +77,11 @@ impl SearchQueue {
             return;
         }
         self.minimum_score = score;
-        let mut dropped = 0;
         while let Some((bucket_score, _)) = self.buckets.first_key_value() {
             if *bucket_score >= self.minimum_score {
                 break;
             }
-            dropped += self.buckets.pop_first().unwrap().1.len();
+            self.buckets.pop_first().unwrap().1.len();
         }
     }
 

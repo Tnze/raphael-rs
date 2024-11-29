@@ -5,7 +5,6 @@ use crate::actions::{DURABILITY_ACTIONS, PROGRESS_ACTIONS, QUALITY_ACTIONS};
 use crate::branch_pruning::{is_progress_only_state, strip_quality_effects};
 use crate::macro_solver::fast_lower_bound::fast_lower_bound;
 use crate::macro_solver::search_queue::SearchQueue;
-use crate::utils::NamedTimer;
 use crate::{FinishSolver, QualityUpperBoundSolver, StepLowerBoundSolver};
 
 use std::vec::Vec;
@@ -69,19 +68,14 @@ impl<'a> MacroSolver<'a> {
     /// Returns a list of Actions that maximizes Quality of the completed state.
     /// Returns `None` if the state cannot be completed (i.e. cannot max out Progress).
     pub fn solve(&mut self, state: SimulationState) -> Option<Vec<Action>> {
-        let timer = NamedTimer::new("Finish solver");
         if !self.finish_solver.can_finish(&state) {
             return None;
         }
-        drop(timer);
-
-        let _timer = NamedTimer::new("Full search");
         self.do_solve(state)
     }
 
     fn do_solve(&mut self, state: SimulationState) -> Option<Vec<Action>> {
         let mut search_queue = {
-            let _timer = NamedTimer::new("Initial upper bound");
             let quality_upper_bound = self.quality_upper_bound_solver.quality_upper_bound(state);
             let step_lower_bound = if quality_upper_bound >= self.settings.max_quality {
                 self.step_lower_bound_solver.step_lower_bound(state)

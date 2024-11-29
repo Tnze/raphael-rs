@@ -5,7 +5,6 @@ use crate::{
     actions::{DURABILITY_ACTIONS, QUALITY_ACTIONS},
     finish_solver::FinishSolver,
     macro_solver::pareto_front::QualityParetoFront,
-    utils::NamedTimer,
     QualityUpperBoundSolver,
 };
 
@@ -21,7 +20,6 @@ pub fn fast_lower_bound(
     finish_solver: &mut FinishSolver,
     upper_bound_solver: &mut QualityUpperBoundSolver,
 ) -> u16 {
-    let _timer = NamedTimer::new("Fast lower bound");
     let allowed_actions = settings.allowed_actions.intersection(SEARCH_ACTIONS);
 
     let mut search_queue: RadixHeapMap<u16, SimulationState> = RadixHeapMap::default();
