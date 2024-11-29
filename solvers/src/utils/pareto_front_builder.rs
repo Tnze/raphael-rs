@@ -246,20 +246,6 @@ where
     }
 }
 
-impl<T, U> Drop for ParetoFrontBuilder<T, U>
-where
-    T: Copy + std::cmp::Ord + std::default::Default,
-    U: Copy + std::cmp::Ord + std::default::Default,
-{
-    fn drop(&mut self) {
-        dbg!(
-            self.buffer.capacity(),
-            self.fronts_generated,
-            self.storage.len()
-        );
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

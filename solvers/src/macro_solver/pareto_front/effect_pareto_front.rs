@@ -89,10 +89,3 @@ impl EffectParetoFront {
             .insert(Value::from(state))
     }
 }
-
-impl Drop for EffectParetoFront {
-    fn drop(&mut self) {
-        let pareto_entries: usize = self.buckets.values().map(|value| value.len()).sum();
-        dbg!(self.buckets.len(), pareto_entries);
-    }
-}

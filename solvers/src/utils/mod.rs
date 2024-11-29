@@ -84,9 +84,3 @@ impl<T: Copy> Backtracking<T> {
         self.entries.len() - 1
     }
 }
-
-impl<T: Copy> Drop for Backtracking<T> {
-    fn drop(&mut self) {
-        dbg!(self.entries.len());
-    }
-}

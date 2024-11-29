@@ -32,8 +32,6 @@ impl StepLowerBoundSolver {
         backload_progress: bool,
         unsound_branch_pruning: bool,
     ) -> Self {
-        dbg!(std::mem::size_of::<ReducedState>());
-        dbg!(std::mem::align_of::<ReducedState>());
         let mut bonus_durability_restore = 0;
         if settings.allowed_actions.has(Action::Manipulation) {
             bonus_durability_restore = std::cmp::max(bonus_durability_restore, 10);
@@ -226,9 +224,7 @@ mod tests {
 
     fn solve(settings: Settings, actions: &[Action]) -> u8 {
         let state = SimulationState::from_macro(&settings, actions).unwrap();
-        let result = StepLowerBoundSolver::new(settings, false, false).step_lower_bound(state);
-        dbg!(result);
-        result
+        StepLowerBoundSolver::new(settings, false, false).step_lower_bound(state)
     }
 
     #[test]

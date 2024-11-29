@@ -84,7 +84,6 @@ impl SearchQueue {
             }
             dropped += self.buckets.pop_first().unwrap().1.len();
         }
-        dbg!(self.minimum_score, dropped);
     }
 
     pub fn push(

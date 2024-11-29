@@ -53,8 +53,6 @@ pub struct FinishSolver {
 
 impl FinishSolver {
     pub fn new(settings: Settings) -> FinishSolver {
-        dbg!(std::mem::size_of::<ReducedState>());
-        dbg!(std::mem::align_of::<ReducedState>());
         FinishSolver {
             settings,
             max_progress: HashMap::default(),
@@ -100,11 +98,5 @@ impl FinishSolver {
                 max_progress
             }
         }
-    }
-}
-
-impl Drop for FinishSolver {
-    fn drop(&mut self) {
-        dbg!(self.max_progress.len());
     }
 }

@@ -194,7 +194,6 @@ impl<'a> MacroSolver<'a> {
         }
 
         if let Some(solution) = solution {
-            dbg!(&solution.actions);
             Some(solution.actions)
         } else {
             None
